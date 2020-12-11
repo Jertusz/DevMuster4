@@ -1,5 +1,13 @@
+import Categories from "./components/Categories";
+import Logo from "./components/Logo";
+
 function App() {
-  return <div className="App">Clean App</div>;
+  return (
+    <div>
+      <Logo />
+      <Categories categories={[]} />
+    </div>
+  );
 }
 
 export default App;
