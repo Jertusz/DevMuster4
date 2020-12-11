@@ -6,96 +6,289 @@
 	},
 	"item": [
 		{
-			"name": "AddExercise",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"simple_addition_and_substraction\",\n    \"problem\": \"2+2-2\",\n    \"difficulty\": \"E\",\n    \"solution_a\": \"1\",\n    \"solution_b\": \"2\",\n    \"solution_c\": \"3\",\n    \"solution_d\": \"4\",\n    \"correct_solution\": \"2\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8000/exercises/create/",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"exercises",
-						"create",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ExerciseList",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetExerciseByPK",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetWrongAnswer",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8000/exercises/1/?solution=true&answer=2",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"exercises",
-						"1",
-						""
-					],
-					"query": [
-						{
-							"key": "solution",
-							"value": "true"
+			"name": "ExerciseRequests",
+			"item": [
+				{
+					"name": "AddExercise",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"simple_addition_and_substraction\",\n    \"problem\": \"2+2-2\",\n    \"difficulty\": \"E\",\n    \"solution_a\": \"1\",\n    \"solution_b\": \"2\",\n    \"solution_c\": \"3\",\n    \"solution_d\": \"4\",\n    \"correct_solution\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "answer",
-							"value": "2"
+						"url": {
+							"raw": "localhost:8000/exercises/create/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"create",
+								""
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "ExerciseList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/exercises/list/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetExerciseByPK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/exercises/1/?solution=false",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"1",
+								""
+							],
+							"query": [
+								{
+									"key": "solution",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetWrongAnswer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/exercises/1/?solution=true&answer=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"1",
+								""
+							],
+							"query": [
+								{
+									"key": "solution",
+									"value": "true"
+								},
+								{
+									"key": "answer",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetGoodAnswer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/exercises/1/?solution=true&answer=4",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"1",
+								""
+							],
+							"query": [
+								{
+									"key": "solution",
+									"value": "true"
+								},
+								{
+									"key": "answer",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModifyExercise",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"thats a changed name\",\n    \"difficulty\": \"H\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/exercises/1/?solution=false",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"1",
+								""
+							],
+							"query": [
+								{
+									"key": "solution",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "GetGoodAnswer",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
+			"name": "SolutionRequests",
+			"item": [
+				{
+					"name": "GetSolution",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/exercises/1/solution/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"1",
+								"solution",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateSolution",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"solution\": \"The solution is to add 2 and 2 which equals to 4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/exercises/1/solution/add/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"1",
+								"solution",
+								"add",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSolution",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/exercises/1/solution/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"1",
+								"solution",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModifySolution",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"solution\": \"Thats a changed solution\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/exercises/1/solution/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"exercises",
+								"1",
+								"solution",
+								""
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
