@@ -1,13 +1,16 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
+import Category from "./Category";
 
 const Categories = ({ categories }) => {
   return (
-    <Grid>
-      {categories.map((cat) => (
-        <Category data={cat} />
+    <>
+      {categories.map((category) => (
+        <Grid item xs key={category.id}>
+          <Category data={category} />
+        </Grid>
       ))}
-    </Grid>
+    </>
   );
 };
 export default Categories;
