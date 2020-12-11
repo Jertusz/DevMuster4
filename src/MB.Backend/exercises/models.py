@@ -1,4 +1,5 @@
 from django.db import models
+from categories.models import SubCategory
 
 # Create your models here.
 
@@ -17,6 +18,7 @@ class Exercise(models.Model):
     name = models.CharField(max_length=500)
     problem = models.CharField(max_length=500, blank=True)
     difficulty = models.CharField(max_length=1, choices=DIFFICULTY_CHOICES, blank=True)
+    subcategory = models.ForeignKey(to=SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
 
     solution_a = models.CharField(max_length=500, blank=True)
     solution_b = models.CharField(max_length=500, blank=True)
