@@ -14,9 +14,9 @@ from .serializers import SolutionDetailSerializer
 class ExerciseDetails(APIView):
 
     def get(self, request, pk):
-        exercise = Exercise.objects.get(pk=pk)
-
-        if exercise is None:
+        try:
+            exercise = Exercise.objects.get(pk=pk)
+        except Exercise.DoesNotExist:
             error_message = {"message": "Exercise does not exist"}
             return Response(error_message, status=status.HTTP_404_NOT_FOUND)
 
@@ -31,9 +31,9 @@ class ExerciseDetails(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
-        exercise = Exercise.objects.get(pk=pk)
-
-        if exercise is None:
+        try:
+            exercise = Exercise.objects.get(pk=pk)
+        except Exercise.DoesNotExist:
             error_message = {"message": "Exercise does not exist"}
             return Response(error_message, status=status.HTTP_404_NOT_FOUND)
 
@@ -45,9 +45,9 @@ class ExerciseDetails(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        exercise = Exercise.objects.get(pk=pk)
-
-        if exercise is None:
+        try:
+            exercise = Exercise.objects.get(pk=pk)
+        except Exercise.DoesNotExist:
             error_message = {"message": "Exercise does not exist"}
             return Response(error_message, status=status.HTTP_404_NOT_FOUND)
 
@@ -69,6 +69,8 @@ class ExerciseList(APIView):
 
     def get(self, request):
         exercises = Exercise.objects.all()
+        if not exercises:
+            return Response({"message": "No exercises found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = ExerciseListSerializer(exercises, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -77,9 +79,9 @@ class ExerciseList(APIView):
 class SolutionDetail(APIView):
 
     def get(self, request, pk):
-        solution = Exercise.objects.get(pk=pk).solution_steps
-
-        if solution is None:
+        try:
+            solution = Exercise.objects.get(pk=pk).solution_steps
+        except Solution.DoesNotExist:
             error_message = {"message": "Solution does not exist"}
             return Response(error_message, status=status.HTTP_404_NOT_FOUND)
 
@@ -87,9 +89,9 @@ class SolutionDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
-        solution = Exercise.objects.get(pk=pk).solution_steps
-
-        if solution is None:
+        try:
+            solution = Exercise.objects.get(pk=pk).solution_steps
+        except Solution.DoesNotExist:
             error_message = {"message": "Solution does not exist"}
             return Response(error_message, status=status.HTTP_404_NOT_FOUND)
 
@@ -101,9 +103,9 @@ class SolutionDetail(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        solution = Exercise.objects.get(pk=pk).solution_steps
-
-        if solution is None:
+        try:
+            solution = Exercise.objects.get(pk=pk).solution_steps
+        except Solution.DoesNotExist:
             error_message = {"message": "Solution does not exist"}
             return Response(error_message, status=status.HTTP_404_NOT_FOUND)
 

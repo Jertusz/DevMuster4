@@ -289,6 +289,253 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CategoriesRequests",
+			"item": [
+				{
+					"name": "CategoryList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/categories/list/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCategory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Math\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/categories/add/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"add",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModifyCategory",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Math but lul\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/categories/1/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCategoryByPK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/categories/2/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/categories/1/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SubCategoryList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/categories/list/2/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"list",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddSubCategory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Complex Numbers\",\n    \"category\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/categories/subcategory/add/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"subcategory",
+								"add",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModifySubCategory",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"change\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/categories/subcategory/2/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"subcategory",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSubCategoryByPK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/categories/subcategory/2/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"subcategory",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSubCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/categories/subcategory/2/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"categories",
+								"subcategory",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
