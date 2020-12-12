@@ -88,7 +88,7 @@ export const ContextProvider = ({ children }) => {
   };
 
   const getExcerciseList = async () => {
-    console.log("header", header);
+    console.log("header", headers);
     const res = await axios.get("/exercises/list/", { headers });
     console.log("getExcerciseList", res);
     const { data } = res;
@@ -103,7 +103,10 @@ export const ContextProvider = ({ children }) => {
     dispatch({ type: "SET_CURRENT_CHALLENGE", payload: challenge });
   };
 
-  const getCategories;
+  const getCategories = async () => {
+    const res = axios.get("/categories/list/", { headers });
+    console.log("getCategories", res);
+  };
 
   return (
     <AppContext.Provider
@@ -118,6 +121,7 @@ export const ContextProvider = ({ children }) => {
         login,
         register,
         getExcerciseList,
+        getCategories,
       }}
     >
       {children}
