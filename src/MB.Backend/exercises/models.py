@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-from django.db import models
-
-# Create your models here.
-=======
 from django.db import models
 from categories.models import SubCategory
 from datetime import date
@@ -53,4 +48,3 @@ class ExerciseRating(models.Model):
     exercise = models.ForeignKey(to=Exercise, on_delete=models.SET_NULL, null=True, blank=True)
     user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, blank=True)
     rating = models.FloatField(default=0)
->>>>>>> 0e4766f107f1118bbbd0da04a8acd0e460488100

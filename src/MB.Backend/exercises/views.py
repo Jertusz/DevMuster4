@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render
-
-# Create your views here.
-=======
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -198,4 +193,3 @@ class CreateExerciseRating(APIView):
         except Exception:
             return Response({"message": "Incorrect request format"}, status=status.HTTP_400_BAD_REQUEST)
 
->>>>>>> 0e4766f107f1118bbbd0da04a8acd0e460488100
