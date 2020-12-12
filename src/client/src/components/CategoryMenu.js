@@ -5,16 +5,17 @@ import WrapperCat from "./hoc/WrapperCat";
 
 const CategoryMenu = () => {
   const { categories, currentCategoryId } = useContext(AppContext);
-  const currentCategory = categories[currentCategoryId];
-  const currentSubs = currentCategory?.sub;
-
+  const currentCategory = categories.find(
+    (cat) => cat.id === currentCategoryId
+  );
+  const subs = currentCategory?.sub;
   return (
     <>
       <WrapperCat>
         <Categories categories={categories} />
       </WrapperCat>
       <WrapperCat>
-        <Categories categories={currentSubs} sub={true} />
+        <Categories categories={subs} sub={true} />
       </WrapperCat>
     </>
   );

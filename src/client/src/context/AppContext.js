@@ -5,7 +5,7 @@ import AppReducer from "./AppReducer";
 
 const initialState = {
   token: localStorage.getItem("token") || null,
-  currentCategoryId: 0,
+  currentCategoryId: 1,
   selectedSubCategoriesIds: [],
   challenges: [],
   currentChallenge: null,
@@ -65,13 +65,14 @@ export const ContextProvider = ({ children }) => {
   const headers = createHeader(token);
 
   const register = async () => {
-    await axios.post("/user/register/", {
-      username: "test",
+    const res = await axios.post("/user/register/", {
+      username: "ljk",
       first_name: "",
       last_name: "",
       email: "test12@test.com",
-      password: "pa$$W0RD",
+      password: "lkj",
     });
+    console.log("register", res);
   };
 
   const login = async (cred) => {
@@ -104,8 +105,20 @@ export const ContextProvider = ({ children }) => {
   };
 
   const getCategories = async () => {
-    const res = axios.get("/categories/list/", { headers });
+    const res = await axios.get("/categories/list/", { headers });
     console.log("getCategories", res);
+    const { data } = res;
+
+    data?.forEach(async (cat) => {
+      const res = await axios.get(`/categories/list/${cat.id}/`, {
+        headers,
+      });
+      const { data } = res;
+      console.log("subCategories", data);
+      cat.sub = data;
+    });
+    console.log("mappedCategories", data);
+    dispatch({ type: "SET_CATEGORIES", payload: data });
   };
 
   return (

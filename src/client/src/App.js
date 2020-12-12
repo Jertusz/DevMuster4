@@ -11,10 +11,15 @@ import { AppContext } from "./context/AppContext";
 
 function App() {
   const [challengeOpen, setChallengeOpen] = React.useState(true);
-  const { getExcerciseList } = useContext(AppContext);
+  const { getExcerciseList, getCategories, setCategory, register } = useContext(
+    AppContext
+  );
 
   useEffect(() => {
+    setCategory(1);
     getExcerciseList();
+    getCategories();
+    register();
   }, []);
 
   return (

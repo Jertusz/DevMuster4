@@ -51,6 +51,11 @@ export default (state, action) => {
         challenges: payload,
       };
 
+    case "SET_CATEGORIES":
+      return {
+        ...state,
+        categories: payload,
+      };
     default:
       throw new Error(`Unhandled action ${type}`);
   }
