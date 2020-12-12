@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Box,
   Paper,
   Table,
   TableBody,
@@ -7,6 +8,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
   withStyles,
 } from "@material-ui/core";
 import { StarBorder, Favorite } from "@material-ui/icons";
@@ -17,6 +19,9 @@ import StyledRating from "../utils/StyledRating";
 const Challenges = () => {
   return (
     <TableContainer component={Paper}>
+      <Box m={2}>
+        <Typography variant="h5">Challenges</Typography>
+      </Box>
       <Table aria-label="Challanges table">
         <TableHead>
           <TableRow>

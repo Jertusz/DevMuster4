@@ -1,4 +1,5 @@
 import {
+  Box,
   Paper,
   Table,
   TableBody,
@@ -6,12 +7,16 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@material-ui/core";
 import React from "react";
 
 const Leaderboard = () => {
   return (
     <TableContainer component={Paper}>
+      <Box m={2}>
+        <Typography variant="h5">Leaderboard</Typography>
+      </Box>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
