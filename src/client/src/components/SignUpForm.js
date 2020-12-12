@@ -59,7 +59,7 @@ const SignUpForm = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Button color="secondary" fullWidth type="submit" variant="contained">
-                        Log in
+                        Sign Up
                     </Button>
                 </Grid>
             </Grid>
