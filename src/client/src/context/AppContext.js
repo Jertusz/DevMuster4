@@ -62,6 +62,8 @@ export const ContextProvider = ({ children }) => {
     token,
   } = state;
 
+  const headers = createHeader(token);
+
   const register = async () => {
     await axios.post("/user/register/", {
       username: "test",
@@ -86,9 +88,8 @@ export const ContextProvider = ({ children }) => {
   };
 
   const getExcerciseList = async () => {
-    const header = createHeader(token);
     console.log("header", header);
-    const res = await axios.get("/exercises/list/", { headers: header });
+    const res = await axios.get("/exercises/list/", { headers });
     console.log("getExcerciseList", res);
     const { data } = res;
     dispatch({ type: "SET_EXCERCISES", payload: data });
@@ -101,6 +102,8 @@ export const ContextProvider = ({ children }) => {
   const setCurrentChallenge = (challenge) => {
     dispatch({ type: "SET_CURRENT_CHALLENGE", payload: challenge });
   };
+
+  const getCategories;
 
   return (
     <AppContext.Provider
