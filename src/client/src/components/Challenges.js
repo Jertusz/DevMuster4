@@ -21,7 +21,9 @@ import axios from "axios";
 import createHeader from "../utils/createHeader";
 
 const Challenges = () => {
-  const { challenges, categories, token } = useContext(AppContext);
+  const { challenges, categories, selectedSubCategoriesIds } = useContext(
+    AppContext
+  );
   console.log("challenges", challenges);
   console.log("categories", categories);
 
@@ -54,10 +56,16 @@ const Challenges = () => {
             // c.subcategory = await getSubName(c.id);
             return <Challenge key={i} challenge={c} />;
           })} */}
-          {challenges?.map((c, i) => {
-            // c.subcategory = await getSubName(c.id);
-            return <Challenge key={i} challenge={c} />;
-          })}
+          {challenges
+            .filter((challenge) =>
+              selectedSubCategoriesIds.length > 0
+                ? selectedSubCategoriesIds.includes(challenge.subcategory)
+                : true
+            )
+            ?.map((c, i) => {
+              // c.subcategory = await getSubName(c.id);
+              return <Challenge key={i} challenge={c} />;
+            })}
           <TableRow>
             <TableCell scope="row">
               <Link to="/challenge/2">Zabawna całka</Link>
