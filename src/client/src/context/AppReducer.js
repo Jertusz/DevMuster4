@@ -13,6 +13,8 @@ export default (state, action) => {
       return {
         ...state,
         currentCategoryId: payload,
+        currentCategory:
+          state.categories.find((cat) => cat.id === payload) || null,
         selectedSubCategoriesIds: [],
       };
 

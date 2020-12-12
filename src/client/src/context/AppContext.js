@@ -10,6 +10,8 @@ const initialState = {
   challenges: [],
   currentChallenge: null,
   categories: [],
+  currentCategory: null,
+  loggedIn: !!localStorage.getItem("token") || false,
 };
 
 export const AppContext = createContext(initialState);
@@ -23,6 +25,8 @@ export const ContextProvider = ({ children }) => {
     selectedSubCategoriesIds,
     challenges,
     token,
+    currentCategory,
+    loggedIn,
   } = state;
 
   const headers = createHeader(token);
@@ -37,6 +41,10 @@ export const ContextProvider = ({ children }) => {
     });
     console.log("register", res);
   };
+
+  // const getUser = async () => {
+  //   const res =
+  // }
 
   const login = async (cred) => {
     const res = await axios.post("/user/login/", cred);
@@ -92,6 +100,8 @@ export const ContextProvider = ({ children }) => {
         selectedSubCategoriesIds,
         challenges,
         token,
+        currentCategory,
+        loggedIn,
         setCategory,
         toggleSubCategory,
         setCurrentChallenge,

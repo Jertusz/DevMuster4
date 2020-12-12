@@ -21,11 +21,7 @@ import axios from "axios";
 import createHeader from "../utils/createHeader";
 
 const Challenges = () => {
-  const { challenges, categories, selectedSubCategoriesIds } = useContext(
-    AppContext
-  );
-  console.log("challenges", challenges);
-  console.log("categories", categories);
+  const { challenges, selectedSubCategoriesIds } = useContext(AppContext);
 
   // const getSubName = async (id) => {
   //   const res = await axios.get(`/categories/subcategory/${id}/`, {
@@ -46,7 +42,7 @@ const Challenges = () => {
         <TableHead>
           <TableRow>
             <TableCell variant="head">Name</TableCell>
-            <TableCell align="right">Sub category</TableCell>
+            <TableCell align="right">Sub category id</TableCell>
             <TableCell align="right">Difficulty</TableCell>
             <TableCell align="right">Rating</TableCell>
           </TableRow>
@@ -63,7 +59,6 @@ const Challenges = () => {
                 : true
             )
             ?.map((c, i) => {
-              // c.subcategory = await getSubName(c.id);
               return <Challenge key={i} challenge={c} />;
             })}
           <TableRow>

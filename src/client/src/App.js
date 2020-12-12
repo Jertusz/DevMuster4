@@ -8,6 +8,8 @@ import Leaderboard from "./components/Leaderboard";
 import Logo from "./components/Logo";
 import UserInfo from "./components/UserInfo";
 import { AppContext } from "./context/AppContext";
+import StartBattle from "./components/StartBattle";
+import CreateQuestion from "./components/CreateQuestion";
 
 function App() {
   const [challengeOpen, setChallengeOpen] = React.useState(true);
@@ -22,11 +24,23 @@ function App() {
   return (
     <Box mx={3}>
       <Grid container spacing={3} justify="center" className="wrapper">
-        <Grid item xs={8} className="logo">
+        <Grid item xs={6} className="logo">
           <Logo />
         </Grid>
         <Grid item xs>
-          <UserInfo />
+          <Box mt={2}>
+            <StartBattle />
+          </Box>
+        </Grid>
+        <Grid item xs>
+          <Box mt={2}>
+            <CreateQuestion />
+          </Box>
+        </Grid>
+        <Grid item xs>
+          <Box mt={2}>
+            <UserInfo />
+          </Box>
         </Grid>
         <Grid
           container

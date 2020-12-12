@@ -4,25 +4,22 @@ import {
   Button,
   createStyles,
   Dialog,
-  FormControl,
   FormControlLabel,
   IconButton,
   makeStyles,
   Radio,
   RadioGroup,
-  Select,
-  Slide,
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { Close, StarBorder } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { AppContext } from "../context/AppContext";
+import createHeader from "../utils/createHeader";
 import { mapDiff } from "../utils/helpers";
 import Feedback from "./Feedback";
-import axios from "axios";
-import createHeader from "../utils/createHeader";
-import { AppContext } from "../context/AppContext";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -46,9 +43,13 @@ const CurrentChallenge = ({
   const [selected, setSelected] = useState(null);
   const [openFeedback, setOpenFeedback] = useState(false);
   const [challenge, setChallenge] = useState(null);
+
   const [correct, setCorrect] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
   const classes = useStyles();
-  console.log(selected);
+  console.log("correct", correct);
+  console.log("selected", selected);
+  console.log("submitted", submitted);
 
   const { token } = useContext(AppContext);
   const headers = createHeader(token);
@@ -58,13 +59,19 @@ const CurrentChallenge = ({
   // });
 
   const check = async () => {
-    const res = await axios.get(
-      `/exercises/${id}/?solution=true&answer=${selected}`,
-      {
+    let correct;
+    await axios
+      .get(`/exercises/${id}/?solution=true&answer=${selected}`, {
         headers,
-      }
-    );
-    console.log("correct", res);
+      })
+      .then(() => {
+        correct = true;
+      })
+      .catch(() => {
+        correct = false;
+      });
+    setSubmitted(true);
+    setCorrect(correct);
   };
 
   const { id } = params;
@@ -101,6 +108,8 @@ const CurrentChallenge = ({
 
   const solutions = [solution_a, solution_b, solution_c, solution_d];
   if (!challenge) return <>Loading</>;
+
+  const message = submitted ? (correct ? "Correct ✔" : "Wrong ❌") : "";
 
   return (
     <>
@@ -165,7 +174,8 @@ const CurrentChallenge = ({
           </RadioGroup>
         </Box>
       </Dialog>
-      <Feedback open={openFeedback} setOpen={setOpenFeedback} />
+
+      <Feedback open={openFeedback} setOpen={setOpenFeedback} text={message} />
     </>
   );
 };

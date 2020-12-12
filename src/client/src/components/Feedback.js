@@ -10,7 +10,7 @@ import { Favorite } from "@material-ui/icons";
 import React from "react";
 import StyledRating from "../utils/StyledRating";
 
-const Feedback = ({ open, setOpen }) => {
+const Feedback = ({ open, setOpen, text }) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -18,11 +18,22 @@ const Feedback = ({ open, setOpen }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle id="alert-dialog-title">
-        Feel free to leave feedback 😉
+        <Typography align="center" variant="h4">
+          {text}
+        </Typography>
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          <Box justifyContent="center" display="flex">
+          <Box
+            justifyContent="center"
+            display="flex"
+            flexDirection="column"
+            // alignContent="center"
+            alignItems="center"
+          >
+            <Typography color="textSecondary">
+              Please rate the question
+            </Typography>
             <StyledRating
               name="feedback"
               defaultValue={4.5}
