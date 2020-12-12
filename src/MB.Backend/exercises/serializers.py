@@ -18,6 +18,23 @@ class ExerciseDetailsSerializer(serializers.ModelSerializer):
         ]
 
 
+class CreateExerciseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Exercise
+        fields = [
+            "name",
+            "problem",
+            "difficulty",
+            "subcategory",
+            "solution_a",
+            "solution_b",
+            "solution_c",
+            "solution_d",
+            "solution_steps",
+            "correct_solution"
+        ]
+
+
 class ExerciseListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
