@@ -5,7 +5,7 @@ import Category from "./Category";
 const Categories = ({ categories }) => {
   return (
     <>
-      {categories.map((category) => (
+      {categories?.map((category) => (
         <Grid item xs key={category.id}>
           <Category data={category} />
         </Grid>

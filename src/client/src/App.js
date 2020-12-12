@@ -1,15 +1,12 @@
 import { Box, Grid } from "@material-ui/core";
+import { useContext } from "react";
 import Categories from "./components/Categories";
 import Leaderboard from "./components/Leaderboard";
 import Logo from "./components/Logo";
+import { AppContext } from "./context/AppContext";
 
 function App() {
-  const categories = [
-    { id: 0, name: "Math", sub: ["foo", "bar", "baz"] },
-    { id: 1, name: "Chemistry", sub: ["foo", "bar", "baz"] },
-    { id: 2, name: "Biology", sub: ["foo", "bar", "baz"] },
-    { id: 3, name: "Physics", sub: ["foo", "bar", "baz"] },
-  ];
+  const { categories } = useContext(AppContext);
 
   return (
     <Box mx={3}>
