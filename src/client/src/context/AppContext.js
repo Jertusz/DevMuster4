@@ -53,6 +53,10 @@ export const ContextProvider = ({ children }) => {
     dispatch({ type: "SET_CATEGORY", payload: id });
   };
 
+  const toggleSubCategory = (id) => {
+    dispatch({ type: "TOGGLE_SUB_CATEGORY", payload: id });
+  };
+
   const { currentCategoryId, categories, selectedSubCategoriesIds } = state;
   return (
     <AppContext.Provider
@@ -61,6 +65,7 @@ export const ContextProvider = ({ children }) => {
         categories,
         selectedSubCategoriesIds,
         setCategory,
+        toggleSubCategory,
       }}
     >
       {children}

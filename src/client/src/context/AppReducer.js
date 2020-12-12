@@ -8,9 +8,31 @@ export default (state, action) => {
       return state;
 
     case "SET_CATEGORY":
+      if (state.currentCategoryId === payload) return state;
+
       return {
         ...state,
         currentCategoryId: payload,
+        selectedSubCategoriesIds: [],
       };
+
+    case "TOGGLE_SUB_CATEGORY":
+      const exists = state.selectedSubCategoriesIds.includes(payload);
+
+      if (exists)
+        return {
+          ...state,
+          selectedSubCategoriesIds: state.selectedSubCategoriesIds.filter(
+            (id) => id !== payload
+          ),
+        };
+
+      return {
+        ...state,
+        selectedSubCategoriesIds: [...state.selectedSubCategoriesIds, payload],
+      };
+
+    default:
+      throw new Error(`Unhandled action ${type}`);
   }
 };
