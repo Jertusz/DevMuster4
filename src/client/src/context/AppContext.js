@@ -91,6 +91,7 @@ export const ContextProvider = ({ children }) => {
         categories,
         selectedSubCategoriesIds,
         challenges,
+        token,
         setCategory,
         toggleSubCategory,
         setCurrentChallenge,

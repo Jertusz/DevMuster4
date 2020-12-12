@@ -15,11 +15,14 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { Close, StarBorder } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
 import { mapDiff } from "../utils/helpers";
 import Feedback from "./Feedback";
+import axios from "axios";
+import createHeader from "../utils/createHeader";
+import { AppContext } from "../context/AppContext";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -34,7 +37,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 const CurrentChallenge = ({
-  challenge,
+  // challenge,
   open,
   setOpen,
   match: { params },
@@ -42,14 +45,39 @@ const CurrentChallenge = ({
 }) => {
   const [selected, setSelected] = useState(null);
   const [openFeedback, setOpenFeedback] = useState(false);
+  const [challenge, setChallenge] = useState(null);
+  const [correct, setCorrect] = useState(null);
   const classes = useStyles();
   console.log(selected);
+
+  const { token } = useContext(AppContext);
+  const headers = createHeader(token);
 
   // const Transition = forwardRef((props, ref) => {
   //   return <Slide direction="up" ref={ref} {...props} />;
   // });
 
+  const check = async () => {
+    const res = await axios.get(
+      `/exercises/${id}/?solution=true&answer=${selected}`,
+      {
+        headers,
+      }
+    );
+    console.log("correct", res);
+  };
+
+  const { id } = params;
+
   useEffect(() => {
+    console.log("headers", headers);
+    (async () => {
+      const res = await axios.get(`/exercises/${id}/?solution=false`, {
+        headers,
+      });
+      console.log(res);
+      setChallenge(res.data);
+    })();
     setOpen(true);
     return () => {
       setOpen(false);
@@ -60,8 +88,6 @@ const CurrentChallenge = ({
     history.push("/");
   };
 
-  // const {id} = params;
-
   const {
     name,
     problem,
@@ -71,9 +97,10 @@ const CurrentChallenge = ({
     solution_b,
     solution_c,
     solution_d,
-  } = challenge;
+  } = challenge || {};
 
   const solutions = [solution_a, solution_b, solution_c, solution_d];
+  if (!challenge) return <>Loading</>;
 
   return (
     <>
@@ -105,6 +132,7 @@ const CurrentChallenge = ({
               color="inherit"
               onClick={() => {
                 console.log("openFeedback", openFeedback);
+                check();
                 setOpenFeedback(true);
               }}
             >
@@ -120,16 +148,19 @@ const CurrentChallenge = ({
             value={selected}
             onChange={(e) => {
               console.log(selected);
-              setSelected(parseInt(e.target.value));
+              setSelected(e.target.value);
             }}
           >
             {solutions?.map((solution, i) => (
-              <FormControlLabel
-                key={i}
-                value={i}
-                label={solution}
-                control={<Radio />}
-              />
+              <>
+                {}
+                <FormControlLabel
+                  key={i}
+                  value={solution}
+                  label={solution}
+                  control={<Radio />}
+                />
+              </>
             ))}
           </RadioGroup>
         </Box>

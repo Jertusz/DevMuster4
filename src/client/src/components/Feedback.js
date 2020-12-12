@@ -24,6 +24,7 @@ const Feedback = ({ open, setOpen }) => {
         <DialogContentText id="alert-dialog-description">
           <Box justifyContent="center" display="flex">
             <StyledRating
+              name="feedback"
               defaultValue={4.5}
               precision={0.5}
               IconContainerComponent={Favorite}

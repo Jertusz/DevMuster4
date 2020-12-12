@@ -51,16 +51,16 @@ function App() {
         path="/challenge/:id"
         render={(props) => (
           <CurrentChallenge
-            challenge={{
-              name: "simple_addition_and_substraction",
-              problem: "2+2-2",
-              subcategory: "3",
-              difficulty: "E",
-              solution_a: "1",
-              solution_b: "2",
-              solution_c: "3",
-              solution_d: "4",
-            }}
+            // challenge={{
+            //   name: "simple_addition_and_substraction",
+            //   problem: "2+2-2",
+            //   subcategory: "3",
+            //   difficulty: "E",
+            //   solution_a: "1",
+            //   solution_b: "2",
+            //   solution_c: "3",
+            //   solution_d: "4",
+            // }}
             open={challengeOpen}
             setOpen={setChallengeOpen}
             {...props}

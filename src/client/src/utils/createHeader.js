@@ -1,3 +1,3 @@
 export default (token) => ({
-  authorization: `Token ${token}`,
+  Authorization: `Token ${token}`,
 });
