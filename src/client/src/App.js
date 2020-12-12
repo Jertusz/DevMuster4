@@ -6,14 +6,18 @@ import Challenges from "./components/Challenges";
 import CurrentChallenge from "./components/CurrentChallenge";
 import Leaderboard from "./components/Leaderboard";
 import Logo from "./components/Logo";
+import UserInfo from "./components/UserInfo";
 
 function App() {
   const [challengeOpen, setChallengeOpen] = React.useState(true);
   return (
     <Box mx={3}>
       <Grid container spacing={3} justify="center" className="wrapper">
-        <Grid item xs={12} className="logo">
+        <Grid item xs={8} className="logo">
           <Logo />
+        </Grid>
+        <Grid item xs>
+          <UserInfo />
         </Grid>
         <Grid
           container
