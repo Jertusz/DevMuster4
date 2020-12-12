@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+src/MB.Backend/mathbattle/__pycache__/
 *.py[cod]
 *$py.class
 
