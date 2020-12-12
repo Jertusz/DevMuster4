@@ -1,20 +1,25 @@
 import {
   AppBar,
+  Box,
   Button,
   createStyles,
   Dialog,
-  Divider,
+  FormControl,
+  FormControlLabel,
   IconButton,
-  List,
-  ListItem,
-  ListItemText,
   makeStyles,
+  Radio,
+  RadioGroup,
+  Select,
   Slide,
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import React, { forwardRef, useEffect } from "react";
-import { Close } from "@material-ui/icons";
+import React, { forwardRef, useEffect, useState } from "react";
+import { Close, StarBorder } from "@material-ui/icons";
+import Rating from "@material-ui/lab/Rating";
+import { mapDiff } from "../utils/helpers";
+import Feedback from "./Feedback";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -35,10 +40,14 @@ const CurrentChallenge = ({
   match: { params },
   history,
 }) => {
+  const [selected, setSelected] = useState(null);
+  const [openFeedback, setOpenFeedback] = useState(false);
   const classes = useStyles();
-  const Transition = forwardRef((props, ref) => {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+  console.log(selected);
+
+  // const Transition = forwardRef((props, ref) => {
+  //   return <Slide direction="up" ref={ref} {...props} />;
+  // });
 
   useEffect(() => {
     setOpen(true);
@@ -47,12 +56,11 @@ const CurrentChallenge = ({
     };
   }, []);
 
-  const { id } = params || {};
-
   const handleClose = () => {
     history.push("/");
-    setOpen(false);
   };
+
+  // const {id} = params;
 
   const {
     name,
@@ -65,44 +73,69 @@ const CurrentChallenge = ({
     solution_d,
   } = challenge;
 
+  const solutions = [solution_a, solution_b, solution_c, solution_d];
+
   return (
-    <Dialog
-      fullScreen
-      open={open}
-      onClose={handleClose}
-      TransitionComponent={Transition}
-    >
-      <AppBar className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            onClick={handleClose}
-            aria-label="close"
+    <>
+      <Dialog fullScreen open={open} onClose={handleClose}>
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <Close />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              {name}
+            </Typography>
+            <Box justifyContent="center">
+              <Rating
+                readOnly
+                max={3}
+                defaultValue={mapDiff(difficulty)}
+                precision={1}
+                emptyIcon={<StarBorder fontSize="inherit" />}
+              />
+            </Box>
+            <Button
+              autoFocus
+              color="inherit"
+              onClick={() => {
+                console.log("openFeedback", openFeedback);
+                setOpenFeedback(true);
+              }}
+            >
+              Submit
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <Typography variant="h3" align="center">
+          {problem}
+        </Typography>
+        <Box alignSelf="center" mt={3}>
+          <RadioGroup
+            value={selected}
+            onChange={(e) => {
+              console.log(selected);
+              setSelected(parseInt(e.target.value));
+            }}
           >
-            <Close />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Challenge nr {id}
-          </Typography>
-          <Button autoFocus color="inherit" onClick={handleClose}>
-            save
-          </Button>
-        </Toolbar>
-      </AppBar>
-      <List>
-        <ListItem button>
-          <ListItemText primary="Phone ringtone" secondary="Titania" />
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <ListItemText
-            primary="Default notification ringtone"
-            secondary="Tethys"
-          />
-        </ListItem>
-      </List>
-    </Dialog>
+            {solutions?.map((solution, i) => (
+              <FormControlLabel
+                key={i}
+                value={i}
+                label={solution}
+                control={<Radio />}
+              />
+            ))}
+          </RadioGroup>
+        </Box>
+      </Dialog>
+      <Feedback open={openFeedback} setOpen={setOpenFeedback} />
+    </>
   );
 };
 

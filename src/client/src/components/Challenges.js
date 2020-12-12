@@ -12,15 +12,7 @@ import {
 import { StarBorder, Favorite } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
 import { Link } from "react-router-dom";
-
-const StyledRating = withStyles({
-  iconFilled: {
-    color: "#ff6d75",
-  },
-  iconHover: {
-    color: "#ff3d47",
-  },
-})(Rating);
+import StyledRating from "../utils/StyledRating";
 
 const Challenges = () => {
   return (

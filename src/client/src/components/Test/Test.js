@@ -27,9 +27,7 @@ export const Test = ({ p }) => {
       <h1>{p}</h1>
       {count}
       <button onClick={() => setCount(count + 1)}>Increment</button>
-      <Box m={5}>
-          
-      </Box>
+      <Box m={5}></Box>
     </div>
   );
 };
