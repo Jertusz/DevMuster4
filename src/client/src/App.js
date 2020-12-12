@@ -7,7 +7,7 @@ import Logo from "./components/Logo";
 function App() {
   return (
     <Box mx={3}>
-      <Grid container spacing={3} className="wrapper">
+      <Grid container spacing={3} justify="center" className="wrapper">
         <Grid item xs={12} className="logo">
           <Logo />
         </Grid>
@@ -19,7 +19,7 @@ function App() {
           lg={10}
           spacing={3}
           className="left"
-          alignItems="flex-start"
+          justify="center"
         >
           <CategoryMenu />
           <Grid item xs>

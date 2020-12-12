@@ -56,6 +56,28 @@ const Challenges = () => {
               />
             </TableCell>
           </TableRow>
+          <TableRow>
+            <TableCell scope="row">Zabawna całka</TableCell>
+            <TableCell align="right">Analiza</TableCell>
+            <TableCell align="right">
+              <Rating
+                readOnly
+                defaultValue={5}
+                precision={0.5}
+                emptyIcon={<StarBorder fontSize="inherit" />}
+              />
+            </TableCell>
+            <TableCell align="right">
+              <StyledRating
+                readOnly
+                defaultValue={4.5}
+                precision={0.5}
+                IconContainerComponent={Favorite}
+                color="red"
+                emptyIcon={<Favorite fontSize="inherit" />}
+              />
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
