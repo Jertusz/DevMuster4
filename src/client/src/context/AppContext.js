@@ -4,6 +4,8 @@ import AppReducer from "./AppReducer";
 const initialState = {
   currentCategoryId: 0,
   selectedSubCategoriesIds: [],
+  challenges: [],
+  currentChallenge: null,
   categories: [
     {
       id: 0,
@@ -53,14 +55,30 @@ export const ContextProvider = ({ children }) => {
     dispatch({ type: "SET_CATEGORY", payload: id });
   };
 
-  const { currentCategoryId, categories, selectedSubCategoriesIds } = state;
+  const toggleSubCategory = (id) => {
+    dispatch({ type: "TOGGLE_SUB_CATEGORY", payload: id });
+  };
+
+  const setCurrentChallenge = (challenge) => {
+    dispatch({ type: "SET_CURRENT_CHALLENGE", payload: challenge });
+  };
+
+  const {
+    currentCategoryId,
+    categories,
+    selectedSubCategoriesIds,
+    challenges,
+  } = state;
   return (
     <AppContext.Provider
       value={{
         currentCategoryId,
         categories,
         selectedSubCategoriesIds,
+        challenges,
         setCategory,
+        toggleSubCategory,
+        setCurrentChallenge,
       }}
     >
       {children}

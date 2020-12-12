@@ -2,23 +2,20 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
-const Category = ({ data, sub }) => {
-  const {
-    currentCategoryId,
-    selectedSubCategoriesIds,
-    setCategory,
-  } = useContext(AppContext);
+const SubCategory = ({ data }) => {
+  const { selectedSubCategoriesIds, toggleSubCategory } = useContext(
+    AppContext
+  );
 
   if (!data) return <></>;
   const { name, id } = data;
 
   const isActive = () => {
-    if (!sub) return id === currentCategoryId;
     return selectedSubCategoriesIds.includes(id);
   };
 
   const handleOnClick = () => {
-    setCategory(id);
+    toggleSubCategory(id);
   };
 
   const active = isActive();
@@ -33,7 +30,7 @@ const Category = ({ data, sub }) => {
       }}
     >
       <CardContent>
-        <Typography variant="h4" component="h2" align="center">
+        <Typography variant="h6" align="center">
           {name}
         </Typography>
       </CardContent>
@@ -41,4 +38,4 @@ const Category = ({ data, sub }) => {
   );
 };
 
-export default Category;
+export default SubCategory;

@@ -1,4 +1,3 @@
-import { Grid } from "@material-ui/core";
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import Categories from "./Categories";
@@ -10,14 +9,14 @@ const CategoryMenu = () => {
   const currentSubs = currentCategory?.sub;
 
   return (
-    <Grid container item spacing={2}>
+    <>
       <WrapperCat>
         <Categories categories={categories} />
       </WrapperCat>
       <WrapperCat>
         <Categories categories={currentSubs} sub={true} />
       </WrapperCat>
-    </Grid>
+    </>
   );
 };
 
