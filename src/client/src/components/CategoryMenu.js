@@ -10,14 +10,14 @@ const CategoryMenu = () => {
   const currentSubs = currentCategory?.sub;
 
   return (
-    <Grid container item spacing={2}>
+    <>
       <WrapperCat>
         <Categories categories={categories} />
       </WrapperCat>
       <WrapperCat>
         <Categories categories={currentSubs} sub={true} />
       </WrapperCat>
-    </Grid>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { Box, Grid } from "@material-ui/core";
 import CategoryMenu from "./components/CategoryMenu";
+import Challenges from "./components/Challenges";
 import Leaderboard from "./components/Leaderboard";
 import Logo from "./components/Logo";
 
@@ -16,10 +17,14 @@ function App() {
           xs={12}
           md={8}
           lg={10}
+          spacing={3}
           className="left"
           alignItems="flex-start"
         >
           <CategoryMenu />
+          <Grid item xs>
+            <Challenges />
+          </Grid>
         </Grid>
         <Grid item xs className="leaderboard">
           <Leaderboard />

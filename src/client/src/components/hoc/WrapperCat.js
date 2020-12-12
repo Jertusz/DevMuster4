@@ -1,16 +1,9 @@
-import { Grid } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import React from "react";
 
-export const WrapperCat = ({ children, className = "category" }) => {
+export const WrapperCat = ({ children, spacing = 2 }) => {
   return (
-    <Grid
-      container
-      item
-      xs={12}
-      justify="space-around"
-      spacing={1}
-      className={className}
-    >
+    <Grid container item xs={12} justify="space-between" spacing={spacing}>
       {children}
     </Grid>
   );
