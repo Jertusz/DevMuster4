@@ -1,13 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from .models import Exercise
 from .models import Solution
+from .models import SolvedExercise
 from .serializers import ExerciseDetailsSerializer
 from .serializers import CreateExerciseSerializer
 from .serializers import ExerciseListSerializer
 from .serializers import SolutionDetailSerializer
-from rest_framework.permissions import AllowAny
+from .serializers import SolvedExerciseSerializer
 from .utils import add_point
 
 
@@ -41,6 +43,10 @@ class ExerciseDetails(APIView):
             correct = request.query_params["answer"] == exercise.correct_solution
             if correct:
                 add_point(request.user)
+                SolvedExercise(
+                    exercise=exercise,
+                    user=request.user
+                ).save()
                 return Response({"correct": "true"}, status=status.HTTP_202_ACCEPTED)
             else:
                 return Response({"correct": "false"}, status=status.HTTP_400_BAD_REQUEST)
@@ -87,7 +93,6 @@ class ExerciseList(APIView):
 
     def get(self, request):
         exercises = Exercise.objects.all()
-        print(exercises)
         if not exercises:
             return Response({"message": "No exercises found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = ExerciseListSerializer(exercises, many=True)
@@ -145,3 +150,13 @@ class CreateSolution(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SolvedExercisesList(APIView):
+    permission_classes = [AllowAny, ]
+    def get(self, request):
+        exercises = SolvedExercise.objects.filter(user=request.user)
+        if not exercises:
+            return Response({"message": "No exercises found"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = SolvedExerciseSerializer(exercises, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
