@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { StarBorder, Favorite } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
+import { Link } from "react-router-dom";
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -35,7 +36,9 @@ const Challenges = () => {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell scope="row">Pitagoras</TableCell>
+            <TableCell scope="row">
+              <Link to="/challenge/1">Pitagoras</Link>
+            </TableCell>
             <TableCell align="right">Kategoria</TableCell>
             <TableCell align="right">
               <Rating
@@ -57,7 +60,10 @@ const Challenges = () => {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell scope="row">Zabawna całka</TableCell>
+            <TableCell scope="row">
+              <Link to="/challenge/2">Zabawna całka</Link>
+            </TableCell>
+
             <TableCell align="right">Analiza</TableCell>
             <TableCell align="right">
               <Rating

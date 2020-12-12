@@ -32,6 +32,12 @@ export default (state, action) => {
         selectedSubCategoriesIds: [...state.selectedSubCategoriesIds, payload],
       };
 
+    case "SET_CURRENT_CHALLENGE":
+      return {
+        ...state,
+        currentChallenge: payload,
+      };
+
     default:
       throw new Error(`Unhandled action ${type}`);
   }

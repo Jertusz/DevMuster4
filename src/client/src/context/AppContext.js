@@ -5,6 +5,7 @@ const initialState = {
   currentCategoryId: 0,
   selectedSubCategoriesIds: [],
   challenges: [],
+  currentChallenge: null,
   categories: [
     {
       id: 0,
@@ -58,6 +59,10 @@ export const ContextProvider = ({ children }) => {
     dispatch({ type: "TOGGLE_SUB_CATEGORY", payload: id });
   };
 
+  const setCurrentChallenge = (challenge) => {
+    dispatch({ type: "SET_CURRENT_CHALLENGE", payload: challenge });
+  };
+
   const {
     currentCategoryId,
     categories,
@@ -73,6 +78,7 @@ export const ContextProvider = ({ children }) => {
         challenges,
         setCategory,
         toggleSubCategory,
+        setCurrentChallenge,
       }}
     >
       {children}
