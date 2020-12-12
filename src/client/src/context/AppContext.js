@@ -1,7 +1,10 @@
+import axios from "axios";
 import React, { createContext, useReducer } from "react";
+import createHeader from "../utils/createHeader";
 import AppReducer from "./AppReducer";
 
 const initialState = {
+  token: localStorage.getItem("token") || null,
   currentCategoryId: 0,
   selectedSubCategoriesIds: [],
   challenges: [],
@@ -51,8 +54,44 @@ export const AppContext = createContext(initialState);
 export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
+  const {
+    currentCategoryId,
+    categories,
+    selectedSubCategoriesIds,
+    challenges,
+    token,
+  } = state;
+
+  const register = async () => {
+    await axios.post("/user/register/", {
+      username: "test",
+      first_name: "",
+      last_name: "",
+      email: "test12@test.com",
+      password: "pa$$W0RD",
+    });
+  };
+
+  const login = async (cred) => {
+    const res = await axios.post("/user/login/", cred);
+    console.log("res", res);
+    const {
+      data: { token },
+    } = res || {};
+    if (token) dispatch({ type: "SET_TOKEN", payload: token });
+  };
+
   const setCategory = (id) => {
     dispatch({ type: "SET_CATEGORY", payload: id });
+  };
+
+  const getExcerciseList = async () => {
+    const header = createHeader(token);
+    console.log("header", header);
+    const res = await axios.get("/exercises/list/", { headers: header });
+    console.log("getExcerciseList", res);
+    const { data } = res;
+    dispatch({ type: "SET_EXCERCISES", payload: data });
   };
 
   const toggleSubCategory = (id) => {
@@ -63,12 +102,6 @@ export const ContextProvider = ({ children }) => {
     dispatch({ type: "SET_CURRENT_CHALLENGE", payload: challenge });
   };
 
-  const {
-    currentCategoryId,
-    categories,
-    selectedSubCategoriesIds,
-    challenges,
-  } = state;
   return (
     <AppContext.Provider
       value={{
@@ -79,6 +112,9 @@ export const ContextProvider = ({ children }) => {
         setCategory,
         toggleSubCategory,
         setCurrentChallenge,
+        login,
+        register,
+        getExcerciseList,
       }}
     >
       {children}

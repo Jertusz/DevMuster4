@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Box, Grid } from "@material-ui/core";
 import { Route, Switch, useLocation } from "react-router-dom";
 import CategoryMenu from "./components/CategoryMenu";
@@ -7,9 +7,16 @@ import CurrentChallenge from "./components/CurrentChallenge";
 import Leaderboard from "./components/Leaderboard";
 import Logo from "./components/Logo";
 import UserInfo from "./components/UserInfo";
+import { AppContext } from "./context/AppContext";
 
 function App() {
   const [challengeOpen, setChallengeOpen] = React.useState(true);
+  const { getExcerciseList } = useContext(AppContext);
+
+  useEffect(() => {
+    getExcerciseList();
+  }, []);
+
   return (
     <Box mx={3}>
       <Grid container spacing={3} justify="center" className="wrapper">

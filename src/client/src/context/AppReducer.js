@@ -38,6 +38,19 @@ export default (state, action) => {
         currentChallenge: payload,
       };
 
+    case "SET_TOKEN":
+      localStorage.setItem("token", payload);
+      return {
+        ...state,
+        token: payload,
+      };
+
+    case "SET_EXCERCISES":
+      return {
+        ...state,
+        challenges: payload,
+      };
+
     default:
       throw new Error(`Unhandled action ${type}`);
   }
