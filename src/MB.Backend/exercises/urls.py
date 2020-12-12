@@ -10,4 +10,6 @@ urlpatterns = [
     path("list/", views.ExerciseList.as_view()),
     path("list/<int:pk>/", views.ExerciseBySubCategory.as_view()),
     path("list/solved/", views.SolvedExercisesList.as_view()),
+    path("<int:pk>/rating/", views.ExerciseRatingDetails.as_view()),
+    path("<int:pk>/rating/add/", views.CreateExerciseRating.as_view()),
 ]

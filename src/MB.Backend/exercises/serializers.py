@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Exercise
 from .models import Solution
 from .models import SolvedExercise
+from .models import ExerciseRating
 
 
 class ExerciseDetailsSerializer(serializers.ModelSerializer):
@@ -56,4 +57,10 @@ class SolutionDetailSerializer(serializers.ModelSerializer):
 class SolvedExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = SolvedExercise
+        fields = "__all__"
+
+
+class ExerciseRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExerciseRating
         fields = "__all__"

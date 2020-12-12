@@ -38,8 +38,13 @@ class Exercise(models.Model):
         return f"{self.name} | {self.problem}"
 
 
-
 class SolvedExercise(models.Model):
     exercise = models.ForeignKey(to=Exercise, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateField(default=date.today)
     user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, blank=True)
+
+
+class ExerciseRating(models.Model):
+    exercise = models.ForeignKey(to=Exercise, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, blank=True)
+    rating = models.FloatField(default=0)

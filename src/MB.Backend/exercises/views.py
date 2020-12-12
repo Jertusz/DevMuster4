@@ -5,11 +5,13 @@ from rest_framework.permissions import AllowAny
 from .models import Exercise
 from .models import Solution
 from .models import SolvedExercise
+from .models import ExerciseRating
 from .serializers import ExerciseDetailsSerializer
 from .serializers import CreateExerciseSerializer
 from .serializers import ExerciseListSerializer
 from .serializers import SolutionDetailSerializer
 from .serializers import SolvedExerciseSerializer
+from .serializers import ExerciseRatingSerializer
 from .utils import add_point
 
 
@@ -161,3 +163,33 @@ class SolvedExercisesList(APIView):
             return Response({"message": "No exercises found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = SolvedExerciseSerializer(exercises, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ExerciseRatingDetails(APIView):
+    permission_classes = [AllowAny, ]
+    def get(self, request, pk):
+        ratings = ExerciseRating.objects.filter(exercise_id=pk)
+        if not ratings:
+            return Response({"message": "No rating found"}, status=status.HTTP_404_NOT_FOUND)
+        rating_sum = [x.rating for x in ratings]
+        total_rating = sum(rating_sum)/len(ratings)
+        return Response({"rating": total_rating}, status=status.HTTP_200_OK)
+
+
+class CreateExerciseRating(APIView):
+    permission_classes = [AllowAny, ]
+    def post(self, request, pk):
+        user = request.user
+        rating = request.data["rating"]
+        print(rating)
+        print(pk)
+        try:
+            ExerciseRating(
+                user=user,
+                rating=rating,
+                exercise_id=pk,
+            ).save()
+            return Response({"message": "rating added"}, status=status.HTTP_201_CREATED)
+        except Exception:
+            return Response({"message": "Incorrect request format"}, status=status.HTTP_400_BAD_REQUEST)
+
