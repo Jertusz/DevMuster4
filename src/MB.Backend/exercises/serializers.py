@@ -45,6 +45,8 @@ class ExerciseListSerializer(serializers.ModelSerializer):
         fields = [
             "name",
             "problem",
+            "subcategory",
+            "difficulty",
         ]
 
 

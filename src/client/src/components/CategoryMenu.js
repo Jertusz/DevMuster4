@@ -9,14 +9,18 @@ const CategoryMenu = () => {
     (cat) => cat.id === currentCategoryId
   );
   const subs = currentCategory?.sub;
+  console.log("currentCategory", currentCategory);
+  console.log("subs", subs);
   return (
     <>
       <WrapperCat>
         <Categories categories={categories} />
       </WrapperCat>
-      <WrapperCat>
-        <Categories categories={subs} sub={true} />
-      </WrapperCat>
+      {subs && (
+        <WrapperCat>
+          <Categories categories={subs} sub={true} />
+        </WrapperCat>
+      )}
     </>
   );
 };

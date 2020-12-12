@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Paper,
@@ -15,14 +15,32 @@ import { StarBorder, Favorite } from "@material-ui/icons";
 import Rating from "@material-ui/lab/Rating";
 import { Link } from "react-router-dom";
 import StyledRating from "../utils/StyledRating";
+import { AppContext } from "../context/AppContext";
+import Challenge from "./Challenge";
+import axios from "axios";
+import createHeader from "../utils/createHeader";
 
 const Challenges = () => {
+  const { challenges, categories, token } = useContext(AppContext);
+  console.log("challenges", challenges);
+  console.log("categories", categories);
+
+  // const getSubName = async (id) => {
+  //   const res = await axios.get(`/categories/subcategory/${id}/`, {
+  //     headers: createHeader(token),
+  //   });
+  //   console.log(res);
+  //   return res.name;
+  // };
+
+  // getSubName(1);
+
   return (
     <TableContainer component={Paper}>
       <Box m={2}>
         <Typography variant="h5">Challenges</Typography>
       </Box>
-      <Table aria-label="Challanges table">
+      <Table aria-label="Challenges table">
         <TableHead>
           <TableRow>
             <TableCell variant="head">Name</TableCell>
@@ -32,31 +50,14 @@ const Challenges = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell scope="row">
-              <Link to="/challenge/1">Pitagoras</Link>
-            </TableCell>
-            <TableCell align="right">Kategoria</TableCell>
-            <TableCell align="right">
-              <Rating
-                readOnly
-                max={3}
-                defaultValue={2}
-                precision={0.5}
-                emptyIcon={<StarBorder fontSize="inherit" />}
-              />
-            </TableCell>
-            <TableCell align="right">
-              <StyledRating
-                readOnly
-                defaultValue={2}
-                precision={0.5}
-                IconContainerComponent={Favorite}
-                color="red"
-                emptyIcon={<Favorite fontSize="inherit" />}
-              />
-            </TableCell>
-          </TableRow>
+          {/* {challenges?.map(async (c, i) => {
+            // c.subcategory = await getSubName(c.id);
+            return <Challenge key={i} challenge={c} />;
+          })} */}
+          {challenges?.map((c, i) => {
+            // c.subcategory = await getSubName(c.id);
+            return <Challenge key={i} challenge={c} />;
+          })}
           <TableRow>
             <TableCell scope="row">
               <Link to="/challenge/2">Zabawna całka</Link>
