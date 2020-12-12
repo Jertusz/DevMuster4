@@ -43,6 +43,7 @@ const Challenges = () => {
             <TableCell align="right">
               <Rating
                 readOnly
+                max={3}
                 defaultValue={2}
                 precision={0.5}
                 emptyIcon={<StarBorder fontSize="inherit" />}
@@ -68,6 +69,7 @@ const Challenges = () => {
             <TableCell align="right">
               <Rating
                 readOnly
+                max={3}
                 defaultValue={5}
                 precision={0.5}
                 emptyIcon={<StarBorder fontSize="inherit" />}
