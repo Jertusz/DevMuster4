@@ -11,7 +11,6 @@ from .models import User
 
 
 class UserList(APIView):
-
     def get(self, request):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
@@ -20,6 +19,7 @@ class UserList(APIView):
 
 
 class RegisterUser(APIView):
+    permission_classes = [AllowAny, ]
 
     def post(self, request):
         serializer = RegisterUserSerializer(data=request.data)
