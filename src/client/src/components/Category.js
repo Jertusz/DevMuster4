@@ -2,23 +2,33 @@ import { Card, CardContent, Typography } from "@material-ui/core";
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
-const Category = ({ data }) => {
-  const { setCategory, currentCategoryId } = useContext(AppContext);
+const Category = ({ data, sub }) => {
+  const {
+    currentCategoryId,
+    selectedSubCategoriesIds,
+    setCategory,
+  } = useContext(AppContext);
 
   if (!data) return <></>;
   const { name, id } = data;
 
+  const isActive = () => {
+    if (!sub) return id === currentCategoryId;
+    return selectedSubCategoriesIds.includes(id);
+  };
+
   const handleOnClick = () => {
-    console.log("clicked", id);
     setCategory(id);
   };
+
+  const active = isActive();
 
   return (
     <Card
       onClick={handleOnClick}
       style={{
         cursor: "pointer",
-        color: currentCategoryId === id ? "red" : "black",
+        color: active ? "red" : "black",
       }}
     >
       <CardContent>
