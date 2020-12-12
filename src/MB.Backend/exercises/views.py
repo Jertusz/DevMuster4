@@ -42,7 +42,8 @@ class ExerciseDetails(APIView):
         if request.query_params["solution"] == "true":
             correct = request.query_params["answer"] == exercise.correct_solution
             if correct:
-                add_point(request.user)
+                if exercise.validated:
+                    add_point(request.user)
                 SolvedExercise(
                     exercise=exercise,
                     user=request.user

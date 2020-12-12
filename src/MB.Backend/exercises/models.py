@@ -28,6 +28,7 @@ class Exercise(models.Model):
     solution_d = models.CharField(max_length=500, blank=True)
 
     correct_solution = models.CharField(max_length=500, blank=True)
+    validated = models.BooleanField(default=True)
     solution_steps = models.ForeignKey(to=Solution, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __repr__(self):

@@ -16,6 +16,7 @@ class ExerciseDetailsSerializer(serializers.ModelSerializer):
             "solution_c",
             "solution_d",
             "solution_steps",
+            "validated"
         ]
 
 
@@ -32,7 +33,8 @@ class CreateExerciseSerializer(serializers.ModelSerializer):
             "solution_c",
             "solution_d",
             "solution_steps",
-            "correct_solution"
+            "correct_solution",
+            "validated"
         ]
 
 
