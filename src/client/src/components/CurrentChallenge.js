@@ -53,6 +53,18 @@ const CurrentChallenge = ({
     history.push("/");
     setOpen(false);
   };
+
+  const {
+    name,
+    problem,
+    subcategory,
+    difficulty,
+    solution_a,
+    solution_b,
+    solution_c,
+    solution_d,
+  } = challenge;
+
   return (
     <Dialog
       fullScreen
