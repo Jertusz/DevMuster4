@@ -21,3 +21,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = "__all__"
+
+
+class UserPointSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "points",
+        ]

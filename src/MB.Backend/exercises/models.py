@@ -16,7 +16,7 @@ class Exercise(models.Model):
     ]
 
     name = models.CharField(max_length=500)
-    problem = models.CharField(max_length=500, blank=True)
+    problem = models.CharField(max_length=500, blank=False)
     difficulty = models.CharField(max_length=1, choices=DIFFICULTY_CHOICES, blank=True)
     subcategory = models.ForeignKey(to=SubCategory, on_delete=models.SET_NULL, null=True, blank=True)
 

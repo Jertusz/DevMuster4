@@ -4,11 +4,28 @@ from rest_framework import status
 from .models import Exercise
 from .models import Solution
 from .serializers import ExerciseDetailsSerializer
+from .serializers import CreateExerciseSerializer
 from .serializers import ExerciseListSerializer
 from .serializers import SolutionDetailSerializer
+from rest_framework.permissions import AllowAny
+from .utils import add_point
 
 
 # Create your views here.
+
+
+class ExerciseBySubCategory(APIView):
+
+    def get(self, request, pk):
+        try:
+            exercise = Exercise.objects.filter(subcategory_id=pk)
+            print(exercise)
+        except Exercise.DoesNotExist:
+            error_message = {"message": "Exercise does not exist"}
+            return Response(error_message, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = ExerciseDetailsSerializer(exercise, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ExerciseDetails(APIView):
@@ -23,6 +40,7 @@ class ExerciseDetails(APIView):
         if request.query_params["solution"] == "true":
             correct = request.query_params["answer"] == exercise.correct_solution
             if correct:
+                add_point(request.user)
                 return Response({"correct": "true"}, status=status.HTTP_202_ACCEPTED)
             else:
                 return Response({"correct": "false"}, status=status.HTTP_400_BAD_REQUEST)
@@ -57,7 +75,7 @@ class ExerciseDetails(APIView):
 class CreateExercise(APIView):
 
     def post(self, request):
-        serializer = ExerciseDetailsSerializer(data=request.data)
+        serializer = CreateExerciseSerializer(data=request.data)
 
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -69,6 +87,7 @@ class ExerciseList(APIView):
 
     def get(self, request):
         exercises = Exercise.objects.all()
+        print(exercises)
         if not exercises:
             return Response({"message": "No exercises found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = ExerciseListSerializer(exercises, many=True)
